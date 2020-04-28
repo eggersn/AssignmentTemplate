@@ -1,0 +1,126 @@
+\renewcommand{\theenumi}{(\alph{enumi})}
+% (a), (b), etc. nummeriert werden.
+\renewcommand{\labelenumi}{\text{\theenumi}}
+
+\newcounter{sheetnr}
+\newcounter{exnum}
+
+% Befehl für die Aufgabentitel
+\newcommand{\exercise}[1]{\section*{Aufgabe \theexnum\stepcounter{exnum}: #1}} % Befehl für Aufgabentitel
+
+\newcommand{\cformula}[1]{\smallskip\centerline{#1}\smallskip}
+\newcommand{\inst}[2]{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny{#1}}}}{{#2}}}}
+\newcommand{\bcup}[0]{\mathlarger\bigcup\limits}
+\newcommand{\bcap}[0]{\mathlarger\bigcap\limits}
+\newcommand{\hdelta}[0]{\hat{\delta}}
+\renewcommand{\|}[0]{\:|\:}
+\newtheorem*{ntheorem}{Theorem}
+\definecolor{DarkGreen}{RGB}{0,100,0}
+
+\LetLtxMacro{\temp}{\phi}
+\LetLtxMacro{\phi}{\varphi}
+\LetLtxMacro{\varphi}{\temp}
+\LetLtxMacro{\temp}{\epsilon}
+\LetLtxMacro{\epsilon}{\varepsilon}
+\LetLtxMacro{\varepsilon}{\temp}
+
+\lstdefinestyle{pseudo}{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{DarkGreen},    % comment style
+  escapeinside={(*}{*)},           % if you want to add LaTeX within your code
+  frame=single,	                   % adds a frame around the code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bfseries,       % keyword style
+  morekeywords={function, var, begin, for, each, do,
+   od, fi, if, not, end, accept, reject, then, break, true,
+   false, while},    		   % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,	               % show tabs within strings adding particular underscores
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  stringstyle=\color{mymauve},     % string literal style
+  morecomment=[l]{//},
+    literate=	{Ö}{{\"O}}1
+			{Ä}{{\"A}}1
+			{Ü}{{\"U}}1
+			{ß}{{\ss}}2
+			{ü}{{\"u}}1
+			{ä}{{\"a}}1
+			{ö}{{\"o}}1,
+	morecomment=[l]{//}
+}
+
+\lstdefinestyle{while}{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{DarkGreen},    % comment style
+  escapeinside={(*}{*)},           % if you want to add LaTeX within your code
+  frame=single,	                   % adds a frame around the code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={WHILE, LOOP, END, DO,
+  IF, ENDIF, THEN, ELSE},    		   % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,	               % show tabs within strings adding particular underscores
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  stringstyle=\color{mymauve},     % string literal style
+  morecomment=[l]{//},
+    literate=	{Ö}{{\"O}}1
+			{Ä}{{\"A}}1
+			{Ü}{{\"U}}1
+			{ß}{{\ss}}2
+			{ü}{{\"u}}1
+			{ä}{{\"a}}1
+			{ö}{{\"o}}1,
+	morecomment=[l]{//}
+}
+
+\lstdefinestyle{goto}{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{DarkGreen},    % comment style
+  escapeinside={(*}{*)},           % if you want to add LaTeX within your code
+  frame=single,	                   % adds a frame around the code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={GOTO, IF, THEN, HALT},    		   % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,	               % show tabs within strings adding particular underscores
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  stringstyle=\color{mymauve},     % string literal style
+  morecomment=[l]{//},
+    literate=	{Ö}{{\"O}}1
+			{Ä}{{\"A}}1
+			{Ü}{{\"U}}1
+			{ß}{{\ss}}2
+			{ü}{{\"u}}1
+			{ä}{{\"a}}1
+			{ö}{{\"o}}1,
+	morecomment=[l]{//}
+}
+
+\ohead{Lynn Förster 3394483\\
+Alexander Kharitonov 3390885\\
+Simon Egger 3390843}
+\chead{\Large Übungsblatt \thesheetnr}
+\ihead{Statistik und Stochastik\\
+Wintersemester 19/20\\
+Gruppe 14 (Stefan Zimmer)}
