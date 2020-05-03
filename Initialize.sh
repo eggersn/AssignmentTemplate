@@ -5,12 +5,13 @@ while [ $flag -eq 1 ]
 do
 clear
 echo "Manage your Repository"
-echo "[0] Set Title [1] Manage Authors [2] Exit"
+echo "[0] Set Title [1] Manage Authors [2] Set Group [3] Exit"
 read choice
 
 if ! [ -f config.txt ]
 then
 	echo -e "Title:" > config.txt
+	echo -e "Group:" >> config.txt
 fi
 
 if [ $choice -eq 0 ]
@@ -50,6 +51,12 @@ then
 		sed -i "/Name: $name .*\$/d" config.txt
 	fi
 elif [ $choice -eq 2 ]
+then
+	echo "Set Group: (e.g: \"Group 14 (Tutorname)\"):"
+	read group
+	sed -i "s/Group:.*\$/Group:$group/g" config.txt
+
+elif [ $choice -eq 3 ]
 then
 	echo "Exiting..."
 	flag=0

@@ -8,6 +8,7 @@ read nmbrExercises
 date=$(date '+%Y-%m-%d')
 
 title=$(sed -n '1p' config.txt | sed -E 's/(.*):(.*)/\2/')
+group=$(sed -n '2p' config.txt | sed -E 's/(.*):(.*)/\2/')
 students=""
 studentNames=""
 
@@ -32,6 +33,19 @@ sed -i "s/%sheetnr/$sheetNumber/g" main.tex
 sed -i "s/%Authors/$students/g" main.tex
 sed -i "s/XXXXXXXX/$date/g" main.tex
 sed -i "s/%Title/$title/g" main.tex
+sed -i "s/.*%title/${title} \\\\\\\\ %title/g" ../../styles/FormatAndHeader.tex
+sed -i "s/.*%Authors/${students}%Authors/g" ../../styles/FormatAndHeader.tex
+sed -i "s/.*%group/${group}%group/g" ../../styles/FormatAndHeader.tex
+
+month=$(date '+%m')
+year=$(date '+%Y')
+if [ $month -leq 3 ] || [ $month -geq 10 ]
+then
+	sed -i "s/.*%tornus/Wintersemester $year \\\\\\\\ %tornus/g" ../../styles/FormatAndHeader.tex
+else
+	sed -i "s/.*%tornus/Sommersemester $year \\\\\\\\ %tornus/g" ../../styles/FormatAndHeader.tex
+fi
+
 
 mv main.tex "${studentNames}_UE0${sheetNumber}.tex"
 
