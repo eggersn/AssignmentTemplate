@@ -46,9 +46,9 @@ else
 	sed -i "s/.*%tornus/Sommersemester $year \\\\\\\\ %tornus/g" ../../styles/FormatAndHeader.tex
 fi
 
-studentNames=$(echo $studentNames | sed -i 's/ü/ue/g')
-studentNames=$(echo $studentNames | sed -i 's/ä/ae/g')
-studentNames=$(echo $studentNames | sed -i 's/ö/oe/g')
+studentNames=$(echo $studentNames | sed -E 's/ü/ue/g')
+studentNames=$(echo $studentNames | sed -E 's/ä/ae/g')
+studentNames=$(echo $studentNames | sed -E 's/ö/oe/g')
 mv main.tex "${studentNames}_UE0${sheetNumber}.tex"
 
 cd ..
