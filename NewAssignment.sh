@@ -39,14 +39,16 @@ sed -i "s/.*%group/${group}%group/g" ../../styles/FormatAndHeader.tex
 
 month=$(date '+%m')
 year=$(date '+%Y')
-if [ $month -leq 3 ] || [ $month -geq 10 ]
+if [ $month -le 3 ] || [ $month -ge 10 ]
 then
 	sed -i "s/.*%tornus/Wintersemester $year \\\\\\\\ %tornus/g" ../../styles/FormatAndHeader.tex
 else
 	sed -i "s/.*%tornus/Sommersemester $year \\\\\\\\ %tornus/g" ../../styles/FormatAndHeader.tex
 fi
 
-
+studentNames=$(echo $studentNames | sed -i 's/ü/ue/g')
+studentNames=$(echo $studentNames | sed -i 's/ä/ae/g')
+studentNames=$(echo $studentNames | sed -i 's/ö/oe/g')
 mv main.tex "${studentNames}_UE0${sheetNumber}.tex"
 
 cd ..
