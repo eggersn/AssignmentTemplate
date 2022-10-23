@@ -1,6 +1,8 @@
 # AssignmentTemplate
 Latex assignment template with automated assignment creating, reducing the risk of merge conflicts.
 
+This project is based on [spethso/Abgabentemplate](https://github.com/spethso/Abgabentemplate).
+
 # Setup
 Simply run
 ```
