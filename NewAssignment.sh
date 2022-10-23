@@ -1,6 +1,11 @@
 #!/bin/bash
 echo Sheet Number:
 read sheetNumber
+size=${#sheetNumber}
+if [ $size -eq 1 ]
+then
+    sheetNumber="0$sheetNumber"
+fi
 
 echo Number of Exercises:
 read nmbrExercises
@@ -23,9 +28,9 @@ do
 	fi
 done < config.txt
 
-cp -a "Template/." "UE0"$sheetNumber"/"
+cp -a "Template/." "UE$sheetNumber/"
 
-cd UE0"$sheetNumber"
+cd "UE$sheetNumber"
 
 cd main
 
@@ -49,20 +54,27 @@ fi
 studentNames=$(echo $studentNames | sed -E 's/ü/ue/g')
 studentNames=$(echo $studentNames | sed -E 's/ä/ae/g')
 studentNames=$(echo $studentNames | sed -E 's/ö/oe/g')
-mv main.tex "${studentNames}_UE0${sheetNumber}.tex"
+mv main.tex "${studentNames}_UE${sheetNumber}.tex"
 
 cd ..
 subfilestring=""
 
 for (( i=1; i<=$nmbrExercises; i++ ))
 do
-	cp -a "Exercise_Template/." "Exercise_0"$i"/"
-	mv Exercise_0"$i"/Ex00.tex Exercise_0"$i"/Ex0"$i".tex
-	command=s/"$filename"_UE00.tex/"$filename"_UE0"$sheetNumber".tex/g
-	sed -i "$command" "Exercise_0"$i"/Ex0"$i".tex"
-	subfilestring="$subfilestring"\\\\subfile\\\{../Exercise_0"$i"/Ex0"$i"\\\}
-	sed -i "s/FILENAME/..\/main\/${studentNames}_UE0${sheetNumber}.tex/g" "Exercise_0${i}/Ex0${i}.tex"
-	sed -i "s/%subfile/\\\\subfile\{..\/Exercise_0${i}\/Ex0${i}.tex\}\n%subfile/g" "main/${studentNames}_UE0${sheetNumber}.tex"
+    exercise=""
+    if [ $i -lt 10 ]
+    then 
+        exercise="0$i"
+    else
+        exercise="$i"
+    fi
+	cp -a "Exercise_Template/." "Exercise_$exercise/"
+	mv Exercise_$exercise/Ex00.tex Exercise_$exercise/Ex$exercise.tex
+	command=s/"$filename"_UE00.tex/"$filename"_UE"$sheetNumber".tex/g
+	sed -i "$command" "Exercise_$exercise/Ex$exercise.tex"
+	subfilestring="$subfilestring"\\\\subfile\\\{../Exercise_$exercise/Ex$exercise\\\}
+	sed -i "s/FILENAME/..\/main\/${studentNames}_UE$sheetNumber.tex/g" "Exercise_$exercise/Ex$exercise.tex"
+	sed -i "s/%subfile/\\\\subfile\{..\/Exercise_$exercise\/Ex$exercise.tex\}\n%subfile/g" "main/${studentNames}_UE$sheetNumber.tex"
 done
 
 rm -r Exercise_Template
