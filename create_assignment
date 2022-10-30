@@ -39,7 +39,7 @@ sed -i "s/%sheetnr/$sheetNumber/g" main.tex
 sed -i "s/%Authors/$students/g" main.tex
 sed -i "s/XXXXXXXX/$date/g" main.tex
 sed -i "s/%Title/$title/g" main.tex
-sed -i "s/.*%title/${title} \\\\\\\\ %title/g" ../../styles/preamble.tex
+sed -i "s/.*%title/\\\\ihead\{${title} \\\\\\\\%title/g" ../../styles/preamble.tex
 sed -i "s/.*%Authors/${students}%Authors/g" ../../styles/preamble.tex
 sed -i "s/.*%group/${group}%group/g" ../../styles/preamble.tex
 
@@ -47,9 +47,14 @@ month=$(date '+%m')
 year=$(date '+%Y')
 if [ $month -le 3 ] || [ $month -ge 10 ]
 then
-	sed -i "s/.*%tornus/Wintersemester $year \\\\\\\\ %tornus/g" ../../styles/preamble.tex
+	sed -i "s/.*%tornus/Winter $year \\\\\\\\ %tornus/g" ../../styles/preamble.tex
 else
-	sed -i "s/.*%tornus/Sommersemester $year \\\\\\\\ %tornus/g" ../../styles/preamble.tex
+    if grep -q "Assignment" ../../styles/preamble.tex
+    then
+	    sed -i "s/.*%tornus/Summer $year \\\\\\\\ %tornus/g" ../../styles/preamble.tex
+    else
+	    sed -i "s/.*%tornus/Sommer $year \\\\\\\\ %tornus/g" ../../styles/preamble.tex
+    fi
 fi
 
 studentNames=$(echo $studentNames | sed -E 's/ü/ue/g')

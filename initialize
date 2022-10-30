@@ -5,7 +5,7 @@ while [ $flag -eq 1 ]
 do
 clear
 echo "Manage your Repository"
-echo "[0] Set Title [1] Manage Authors [2] Set Group [3] Exit"
+echo "[0] Set Title [1] Manage Authors [2] Set Group [3] Set Language [4] Exit"
 read choice
 
 if ! [ -f config.txt ]
@@ -55,8 +55,24 @@ then
 	echo "Set Group: (e.g: \"Group 14 (Tutorname)\"):"
 	read group
 	sed -i "s/Group:.*\$/Group:$group/g" config.txt
-
 elif [ $choice -eq 3 ]
+then
+    echo "[0] English [1] German"
+    read choice
+
+    if [ $choice -eq 0 ]
+    then
+        sed -i "s/Übungsblatt/Assignment/g" styles/preamble.tex template/main/main.tex
+        sed -i "s;\\\\usepackage\[ngerman\];% \\\\usepackage\[ngerman\];g" styles/packages.tex
+    elif [ $choice -eq 1 ]
+    then 
+        sed -i "s/Assignment/Übungsblatt/g" styles/preamble.tex template/main/main.tex
+        sed -i "s;% \\\\usepackage\[ngerman\];\\\\usepackage\[ngerman\];g" styles/packages.tex
+    else
+	    echo "Invalid input! Exiting..."
+	    flag=0
+    fi
+elif [ $choice -eq 4 ]
 then
 	echo "Exiting..."
 	flag=0
